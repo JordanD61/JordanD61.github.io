@@ -15,10 +15,13 @@
 			display: block;
 			position: absolute;
 			top: 100px;
-			left: 0px;  /* <--- Change me! */
+			left: 500px;  /* <--- Change me! */
 		}
 		.board{
 			height: 100vh;
+		}
+		body{
+        background-color: blue;   
 		}
 	</style>
 	<!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
@@ -48,8 +51,9 @@
 			box.on('click', handleBoxClick);
 
 			// moves the Box to a new position on the screen along the X-Axis
-			function moveBoxTo(newPositionX) {
+			function moveBoxTo(newPositionX, newPositiony) {
 				box.css("left", newPositionX);
+				box.css("top", newPositiony);
 			}
 
 			// changes the text displayed on the Box
@@ -62,9 +66,16 @@
 			//////////////////////////////////////////////////////////////////
 			
 			// TODO 2 - Variable declarations 
-			
+			var positionX = 0;
+			var pionts = 0;
+			var speed = 10;
+			var positionY = 0;
+			var speedY = 10;
+			var boardHeight = jQuery(window).height();
+			var ranNum = Math.random() * boardWidth;
+			var colorStr = "rbg(50, 25, 250)"
+			box.css("background-color", colorStr)
 
-			
 			/* 
 			This Function will be called 20 times/second. Each time it is called,
 			it should move the Box to a new location. If the box drifts off the screen
@@ -72,8 +83,28 @@
 			*/
 			function update() {
 				
+				positionX = positionX + speed;
+				positionY = positionY + speedY;
 
+				moveBoxTo(positionX, positionY)
+				
+				if (positionX > boardWidth) {
+					speed = -speed;
+				}
+				if (positionX < 0) {
+					speed = -speed;
+				}
+				if (positionY > boardHeight){
+					speedY = -speedY
+				}
+				else if (positionY < 0){
+					speedY = -speedY
+				}
 			};
+			function getRandomColor(){
+				var randomNumberBetween0and10 = Math.random() * 255;
+
+			}
 
 			/* 
 			This Function will be called each time the box is clicked. Each time it is called,
@@ -81,10 +112,27 @@
 			the left side of the screen.
 			*/
 			function handleBoxClick() {
+				positionY = 0;
+				positionX = ranNum;
+				changeBoxText(pionts + 1);
+				pionts++;
 				
-
-
+				
+				if (speed >= 0 ){
+					speed = speed + 3;
+				}
+				else if ( speed < 0 ){
+					speed = speed  - 3;
+				}
+				if (speedY >= 0 ){
+					speedY = SpeedY + 3;
+				}
+				else {
+					speedY = SpeedY - 3;
+				}
+				
 			};
+			randomNumberBetween0and10()
 		})();
 	</script>
 </body>
