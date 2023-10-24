@@ -6,7 +6,7 @@ $(document).ready(function(){
  
 // this section initializes some variablesthat will be used throughout the program
 var doubleMaxSpeed = 5;
-var maxCircles = 10;
+var maxCircles = 200;
 var $board = $('#board');
 var boardWidth = $($board).width();
 var boardHeight = $($board).height();
@@ -134,7 +134,7 @@ function bounceCircle(circle){
     // this bounces off the bottom wall
     else if (circle.y > boardHeight){
         circle.y -= circle.speedY;
-        circle.speedX *= -1;
+        circle.speedY *= -1;
     }
 }
 
